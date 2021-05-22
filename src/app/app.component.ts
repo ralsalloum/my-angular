@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -6,14 +6,21 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'my-angular';
   public data:any = {}
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient)
+  {
     
   }
 
-  getData(){
+  ngOnInit(): void
+  {
+    this.getData();
+  }
+
+  getData()
+  {
     const url ='https://localhost:8000/api/doc.json'
     this.http.get(url).subscribe((res)=>{
       this.data = res
